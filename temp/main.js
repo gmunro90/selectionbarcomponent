@@ -17,17 +17,15 @@ class SelectionBar {
     if (el) {
       el.addEventListener('click', this.handleClick.bind(this))
       let html = `
-        <div>
-
-        </div>
+       
         `
       el.innerHTML = html
-      this.render()
+      // this.render()
     }    
   }
-  render () {
-    console.log('testing')
-  }
+  // render () {
+  //   console.log('testing')
+  // }
   handleClick (event) {  
     if (event.target.classList.contains('bookmarkBtn')) {
       this.openForm() 

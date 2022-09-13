@@ -29,18 +29,15 @@ var SelectionBar = /*#__PURE__*/function () {
 
     if (el) {
       el.addEventListener('click', this.handleClick.bind(this));
-      var html = "\n        <div>\n\n        </div>\n        ";
-      el.innerHTML = html;
-      this.render();
+      var html = "\n       \n        ";
+      el.innerHTML = html; // this.render()
     }
-  }
+  } // render () {
+  //   console.log('testing')
+  // }
+
 
   _createClass(SelectionBar, [{
-    key: "render",
-    value: function render() {
-      console.log('testing');
-    }
-  }, {
     key: "handleClick",
     value: function handleClick(event) {
       if (event.target.classList.contains('bookmarkBtn')) {
