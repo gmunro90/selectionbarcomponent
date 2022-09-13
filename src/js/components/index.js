@@ -1,11 +1,3 @@
-/*
-global
-SelectionBar
-include
-enigma
-schema
-app
-*/
 /* global SelectionBar */ 
 class SelectionBar {
   constructor (elementId, options) {
@@ -34,17 +26,3 @@ class SelectionBar {
     } 
   }
 }
-
-
-const session = enigma.create({
-  schema, 
-  url: 'wss://ec2-3-86-99-193.compute-1.amazonaws.com/app/cee97e28-59cf-411f-acb5-c3a7f40ee7ac'
-})
-
-session.open().then(global => {
-  console.log(global)
-  global.openDoc('cee97e28-59cf-411f-acb5-c3a7f40ee7ac').then(app => {
-    console.log(app)
-    const bookmark = new SelectionBar('websy-selection-bar', {app})
-  })
-})
