@@ -18,6 +18,7 @@ class SelectionBar {
       el.addEventListener('click', this.handleClick.bind(this))
       let html = `
        
+      
         `
       el.innerHTML = html
       // this.render()
@@ -43,6 +44,6 @@ session.open().then(global => {
   console.log(global)
   global.openDoc('cee97e28-59cf-411f-acb5-c3a7f40ee7ac').then(app => {
     console.log(app)
-    const bookmark = new SelectionBar('websy-selection-bar', {app})
+    const selectionBar = new SelectionBar('websySelectionBar', {app})
   })
 })

@@ -29,7 +29,7 @@ var SelectionBar = /*#__PURE__*/function () {
 
     if (el) {
       el.addEventListener('click', this.handleClick.bind(this));
-      var html = "\n       \n        ";
+      var html = "\n       \n      \n        ";
       el.innerHTML = html; // this.render()
     }
   } // render () {
@@ -57,7 +57,7 @@ session.open().then(function (global) {
   console.log(global);
   global.openDoc('cee97e28-59cf-411f-acb5-c3a7f40ee7ac').then(function (app) {
     console.log(app);
-    var bookmark = new SelectionBar('websy-selection-bar', {
+    var selectionBar = new SelectionBar('websySelectionBar', {
       app: app
     });
   });

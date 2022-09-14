@@ -10,6 +10,7 @@ class SelectionBar {
       el.addEventListener('click', this.handleClick.bind(this))
       let html = `
        
+      
         `
       el.innerHTML = html
       // this.render()
