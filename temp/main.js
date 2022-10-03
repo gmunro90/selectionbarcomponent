@@ -75,8 +75,10 @@ class SelectionBar {
       .then(layout => {
         console.log(layout)
         let html = layout.qSelectionObject.qSelections.map(res => 
-          `<h5>${res.qField}</h5>
-          <h6>${res.qSelected}</h6>
+          ` <div class="selection-tabs">
+              <h5>${res.qField}</h5>
+              <h6>${res.qSelected}</h6>
+            </div>
           `)
         if (layout.qSelectionObject.qSelections.length > 0) {
           el.innerHTML += html
@@ -84,8 +86,8 @@ class SelectionBar {
         else {
           el.innerHTML += `
           <div class="selection-tabs">
-      <span>No selections applied</span>
-      </div>`
+            <span>No selections applied</span>
+          </div>`
         }
       })
   }

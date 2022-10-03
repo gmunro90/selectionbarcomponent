@@ -57,13 +57,13 @@ var SelectionBar = /*#__PURE__*/function () {
       this.options.model.getLayout().then(function (layout) {
         console.log(layout);
         var html = layout.qSelectionObject.qSelections.map(function (res) {
-          return "<h5>".concat(res.qField, "</h5>\n          <h6>").concat(res.qSelected, "</h6>\n          ");
+          return " <div class=\"selection-tabs\">\n              <h5>".concat(res.qField, "</h5>\n              <h6>").concat(res.qSelected, "</h6>\n            </div>\n          ");
         });
 
         if (layout.qSelectionObject.qSelections.length > 0) {
           el.innerHTML += html;
         } else {
-          el.innerHTML += "\n          <div class=\"selection-tabs\">\n      <span>No selections applied</span>\n      </div>";
+          el.innerHTML += "\n          <div class=\"selection-tabs\">\n            <span>No selections applied</span>\n          </div>";
         }
       });
     }
