@@ -91,9 +91,24 @@ class SelectionBar {
         }
       })
   }
+  backSelection () {
+    console.log('back clicked')
+  }
+  forwardSelection () {
+    console.log('fwd clicked')
+  }
+  clearSelection () {
+    console.log('clear clicked')
+  }
   handleClick (event) {  
-    if (event.target.classList.contains('explore-btn')) {
-      this.render()
+    if (event.target.classList.contains('back-btn')) {
+      this.backSelection()
+    } 
+    if (event.target.classList.contains('forward-btn')) {
+      this.forwardSelection()
+    } 
+    if (event.target.classList.contains('clear-btn')) {
+      this.clearSelection()
     } 
   }
 }

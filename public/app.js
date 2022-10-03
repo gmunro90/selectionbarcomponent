@@ -68,10 +68,33 @@ var SelectionBar = /*#__PURE__*/function () {
       });
     }
   }, {
+    key: "backSelection",
+    value: function backSelection() {
+      console.log('back clicked');
+    }
+  }, {
+    key: "forwardSelection",
+    value: function forwardSelection() {
+      console.log('fwd clicked');
+    }
+  }, {
+    key: "clearSelection",
+    value: function clearSelection() {
+      console.log('clear clicked');
+    }
+  }, {
     key: "handleClick",
     value: function handleClick(event) {
-      if (event.target.classList.contains('explore-btn')) {
-        this.render();
+      if (event.target.classList.contains('back-btn')) {
+        this.backSelection();
+      }
+
+      if (event.target.classList.contains('forward-btn')) {
+        this.forwardSelection();
+      }
+
+      if (event.target.classList.contains('clear-btn')) {
+        this.clearSelection();
       }
     }
   }]);
