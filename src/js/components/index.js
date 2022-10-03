@@ -49,9 +49,7 @@ class SelectionBar {
       </div>
     </div>
       <div class="selections-group">
-      <div class="selection-tabs">
-        <span>no selections applied</span>
-      </div>
+      
     </div>     
         `
       el.innerHTML = html
@@ -72,7 +70,15 @@ class SelectionBar {
           `<h5>${res.qField}</h5>
           <h6>${res.qSelected}</h6>
           `)
-        el.innerHTML += html
+        if (layout.qSelectionObject.qSelections.length > 0) {
+          el.innerHTML += html
+        }
+        else {
+          el.innerHTML += `
+          <div class="selection-tabs">
+      <span>No selections applied</span>
+      </div>`
+        }
       })
   }
   handleClick (event) {  
