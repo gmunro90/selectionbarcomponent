@@ -20,28 +20,51 @@ app
 /* global SelectionBar */
 var SelectionBar = /*#__PURE__*/function () {
   function SelectionBar(elementId, options) {
+    var _this = this;
+
     _classCallCheck(this, SelectionBar);
 
     this.elementId = elementId;
-    var DEFAULTS = {};
+    var DEFAULTS = {
+      def: {
+        qInfo: {
+          qType: 'currentSelections'
+        },
+        qSelectionObjectDef: {}
+      }
+    };
     this.options = _extends({}, DEFAULTS, options);
     var el = document.getElementById(this.elementId);
 
     if (el) {
       el.addEventListener('click', this.handleClick.bind(this));
-      var html = "\n       \n      \n        ";
-      el.innerHTML = html; // this.render()
+      var html = "\n      <div class=\"left-group\">\n      <div class=\"back\">\n        <button class=\"back-btn\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n            <title>Return Down Back</title>\n            <path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\"\n              d=\"M112 352l-64-64 64-64\" />\n            <path d=\"M64 288h294c58.76 0 106-49.33 106-108v-20\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\"\n              stroke-linejoin=\"round\" stroke-width=\"32\" />\n          </svg>\n        </button>\n      </div>\n      <div class=\"forward\">\n        <button class=\"forward-btn\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n            <title>Return Down Forward</title>\n            <path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\"\n              d=\"M400 352l64-64-64-64\" />\n            <path d=\"M448 288H154c-58.76 0-106-49.33-106-108v-20\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\"\n              stroke-linejoin=\"round\" stroke-width=\"32\" />\n          </svg>\n        </button>\n      </div>\n      <div class=\"clear\">\n        <button class=\"clear-btn\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n            <title>Close Circle</title>\n            <path d=\"M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z\" fill=\"none\"\n              stroke=\"currentColor\" stroke-miterlimit=\"10\" stroke-width=\"32\" />\n            <path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\"\n              d=\"M320 320L192 192M192 320l128-128\" />\n          </svg>\n        </button>\n      </div>\n    </div>\n      <div class=\"selections-group\">\n      <div class=\"selection-tabs\">\n        <span>no selections applied</span>\n      </div>\n    </div>     \n        ";
+      el.innerHTML = html;
     }
-  } // render () {
-  //   console.log('testing')
-  // }
 
+    this.options.app.createSessionObject(this.options.def).then(function (model) {
+      model.on('changed', _this.render.bind(_this));
+      _this.options.model = model;
+
+      _this.render();
+    });
+  }
 
   _createClass(SelectionBar, [{
+    key: "render",
+    value: function render() {
+      var el = document.getElementById(this.elementId);
+      this.options.model.getLayout().then(function (layout) {
+        console.log(layout);
+        var html = "\n        <h5>".concat(layout.qSelectionObject.qSelections[0].qField, "</h5>\n        <h6>").concat(layout.qSelectionObject.qSelections[0].qSelected, "</h6>\n        ");
+        el.innerHTML += html;
+      });
+    }
+  }, {
     key: "handleClick",
     value: function handleClick(event) {
-      if (event.target.classList.contains('bookmarkBtn')) {
-        this.openForm();
+      if (event.target.classList.contains('explore-btn')) {
+        this.render();
       }
     }
   }]);
@@ -51,11 +74,11 @@ var SelectionBar = /*#__PURE__*/function () {
 
 var session = enigma.create({
   schema: schema,
-  url: 'wss://ec2-3-86-99-193.compute-1.amazonaws.com/app/cee97e28-59cf-411f-acb5-c3a7f40ee7ac'
+  url: 'wss://ec2-3-86-99-193.compute-1.amazonaws.com/app/d077bbca-1fa2-4564-83d5-88f801899a5c'
 });
 session.open().then(function (global) {
   console.log(global);
-  global.openDoc('cee97e28-59cf-411f-acb5-c3a7f40ee7ac').then(function (app) {
+  global.openDoc('d077bbca-1fa2-4564-83d5-88f801899a5c').then(function (app) {
     console.log(app);
     var selectionBar = new SelectionBar('websySelectionBar', {
       app: app
