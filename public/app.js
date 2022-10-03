@@ -56,7 +56,9 @@ var SelectionBar = /*#__PURE__*/function () {
       var el = document.getElementById(this.elementId);
       this.options.model.getLayout().then(function (layout) {
         console.log(layout);
-        var html = "\n        <h5>".concat(layout.qSelectionObject.qSelections[0].qField, "</h5>\n        <h6>").concat(layout.qSelectionObject.qSelections[0].qSelected, "</h6>\n        ");
+        var html = layout.qSelectionObject.qSelections.map(function (res) {
+          return "<h5>".concat(res.qField, "</h5>\n          <h6>").concat(res.qSelected, "</h6>\n          ");
+        });
         el.innerHTML += html;
       });
     }

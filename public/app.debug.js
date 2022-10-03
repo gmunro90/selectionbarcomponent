@@ -76,10 +76,10 @@ class SelectionBar {
     this.options.model.getLayout()
       .then(layout => {
         console.log(layout)
-        let html = `
-        <h5>${layout.qSelectionObject.qSelections[0].qField}</h5>
-        <h6>${layout.qSelectionObject.qSelections[0].qSelected}</h6>
-        ` 
+        let html = layout.qSelectionObject.qSelections.map(res => 
+          `<h5>${res.qField}</h5>
+          <h6>${res.qSelected}</h6>
+          `)
         el.innerHTML += html
       })
   }
