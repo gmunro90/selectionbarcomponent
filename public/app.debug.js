@@ -16,6 +16,7 @@ class SelectionBar {
         qInfo: {qType: 'currentSelections'},
         qSelectionObjectDef: {}
       }
+
     }
     this.options = Object.assign({}, DEFAULTS, options)
     const el = document.getElementById(this.elementId)
@@ -58,7 +59,6 @@ class SelectionBar {
       </div>
     </div>
       <div class="selections-group">
-      
     </div>     
         `
       el.innerHTML = html
@@ -75,15 +75,14 @@ class SelectionBar {
     this.options.model.getLayout()
       .then(layout => {
         console.log(layout)
-        let html = layout.qSelectionObject.qSelections.map(res => 
-          `<div class="selection-tabs">
-                <h5>${res.qField}</h5>
-                <h6>${res.qSelected}</h6>
-          </div>
-            
-          `)
         if (layout.qSelectionObject.qSelections.length > 0) {
-          el.innerHTML += html
+          el.innerHTML += layout.qSelectionObject.qSelections.map(selection => 
+            `<div class="selection-tabs">
+              <div id=websyDropdown">
+              <h5>${selection.qField}</h5>
+              <h6>${selection.qSelected}</h6>
+              </div>
+            </div>`)
         }
         else {
           el.innerHTML += `
@@ -125,9 +124,7 @@ const session = enigma.create({
 })
 
 session.open().then(global => {
-  console.log(global)
   global.openDoc('d077bbca-1fa2-4564-83d5-88f801899a5c').then(app => {
-    console.log('app', app)
     const selectionBar = new SelectionBar('websySelectionBar', {app})
     const dropdown = new WebsyDropdown('websyDropdown')
   })

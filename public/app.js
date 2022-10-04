@@ -39,7 +39,7 @@ var SelectionBar = /*#__PURE__*/function () {
 
     if (el) {
       el.addEventListener('click', this.handleClick.bind(this));
-      var html = "\n      <div class=\"left-group\">\n      <div class=\"back\">\n        <button class=\"back-btn\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n            <title>Return Down Back</title>\n            <path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\"\n              d=\"M112 352l-64-64 64-64\" />\n            <path d=\"M64 288h294c58.76 0 106-49.33 106-108v-20\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\"\n              stroke-linejoin=\"round\" stroke-width=\"32\" />\n          </svg>\n        </button>\n      </div>\n      <div class=\"forward\">\n        <button class=\"forward-btn\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n            <title>Return Down Forward</title>\n            <path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\"\n              d=\"M400 352l64-64-64-64\" />\n            <path d=\"M448 288H154c-58.76 0-106-49.33-106-108v-20\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\"\n              stroke-linejoin=\"round\" stroke-width=\"32\" />\n          </svg>\n        </button>\n      </div>\n      <div class=\"clear\">\n        <button class=\"clear-btn\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n            <title>Close Circle</title>\n            <path d=\"M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z\" fill=\"none\"\n              stroke=\"currentColor\" stroke-miterlimit=\"10\" stroke-width=\"32\" />\n            <path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\"\n              d=\"M320 320L192 192M192 320l128-128\" />\n          </svg>\n        </button>\n      </div>\n    </div>\n      <div class=\"selections-group\">\n      \n    </div>     \n        ";
+      var html = "\n      <div class=\"left-group\">\n      <div class=\"back\">\n        <button class=\"back-btn\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n            <title>Return Down Back</title>\n            <path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\"\n              d=\"M112 352l-64-64 64-64\" />\n            <path d=\"M64 288h294c58.76 0 106-49.33 106-108v-20\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\"\n              stroke-linejoin=\"round\" stroke-width=\"32\" />\n          </svg>\n        </button>\n      </div>\n      <div class=\"forward\">\n        <button class=\"forward-btn\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n            <title>Return Down Forward</title>\n            <path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\"\n              d=\"M400 352l64-64-64-64\" />\n            <path d=\"M448 288H154c-58.76 0-106-49.33-106-108v-20\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\"\n              stroke-linejoin=\"round\" stroke-width=\"32\" />\n          </svg>\n        </button>\n      </div>\n      <div class=\"clear\">\n        <button class=\"clear-btn\">\n          <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"ionicon\" viewBox=\"0 0 512 512\">\n            <title>Close Circle</title>\n            <path d=\"M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z\" fill=\"none\"\n              stroke=\"currentColor\" stroke-miterlimit=\"10\" stroke-width=\"32\" />\n            <path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"32\"\n              d=\"M320 320L192 192M192 320l128-128\" />\n          </svg>\n        </button>\n      </div>\n    </div>\n      <div class=\"selections-group\">\n    </div>     \n        ";
       el.innerHTML = html;
     }
 
@@ -57,12 +57,11 @@ var SelectionBar = /*#__PURE__*/function () {
       var el = document.getElementById(this.elementId);
       this.options.model.getLayout().then(function (layout) {
         console.log(layout);
-        var html = layout.qSelectionObject.qSelections.map(function (res) {
-          return "<div class=\"selection-tabs\">\n                <h5>".concat(res.qField, "</h5>\n                <h6>").concat(res.qSelected, "</h6>\n          </div>\n            \n          ");
-        });
 
         if (layout.qSelectionObject.qSelections.length > 0) {
-          el.innerHTML += html;
+          el.innerHTML += layout.qSelectionObject.qSelections.map(function (selection) {
+            return "<div class=\"selection-tabs\">\n              <div id=websyDropdown\">\n              <h5>".concat(selection.qField, "</h5>\n              <h6>").concat(selection.qSelected, "</h6>\n              </div>\n            </div>");
+          });
         } else {
           el.innerHTML += "\n          <div class=\"selection-tabs\">\n            <span>No selections applied</span>\n          </div>";
         }
@@ -111,9 +110,7 @@ var session = enigma.create({
   url: 'wss://ec2-3-86-99-193.compute-1.amazonaws.com/app/d077bbca-1fa2-4564-83d5-88f801899a5c'
 });
 session.open().then(function (global) {
-  console.log(global);
   global.openDoc('d077bbca-1fa2-4564-83d5-88f801899a5c').then(function (app) {
-    console.log('app', app);
     var selectionBar = new SelectionBar('websySelectionBar', {
       app: app
     });

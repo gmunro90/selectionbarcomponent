@@ -15,9 +15,7 @@ const session = enigma.create({
 })
 
 session.open().then(global => {
-  console.log(global)
   global.openDoc('d077bbca-1fa2-4564-83d5-88f801899a5c').then(app => {
-    console.log('app', app)
     const selectionBar = new SelectionBar('websySelectionBar', {app})
     const dropdown = new WebsyDropdown('websyDropdown')
   })
