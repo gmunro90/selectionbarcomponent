@@ -85,12 +85,15 @@ class SelectionBar {
   }
   backSelection () {
     console.log('back clicked')
+    this.options.model.back()
   }
   forwardSelection () {
     console.log('fwd clicked')
+    this.options.model.forward()
   }
   clearSelection () {
     console.log('clear clicked')
+    this.options.model.clearAll()
   }
   handleClick (event) {  
     if (event.target.classList.contains('back-btn')) {

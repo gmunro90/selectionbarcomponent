@@ -1,6 +1,7 @@
 /*
 global
 SelectionBar
+WebsyDropdown
 include
 enigma
 schema
@@ -93,12 +94,15 @@ class SelectionBar {
   }
   backSelection () {
     console.log('back clicked')
+    this.options.model.back()
   }
   forwardSelection () {
     console.log('fwd clicked')
+    this.options.model.forward()
   }
   clearSelection () {
     console.log('clear clicked')
+    this.options.model.clearAll()
   }
   handleClick (event) {  
     if (event.target.classList.contains('back-btn')) {
@@ -122,7 +126,8 @@ const session = enigma.create({
 session.open().then(global => {
   console.log(global)
   global.openDoc('d077bbca-1fa2-4564-83d5-88f801899a5c').then(app => {
-    console.log(app)
+    console.log('app', app)
     const selectionBar = new SelectionBar('websySelectionBar', {app})
+    const dropdown = new WebsyDropdown('websyDropdown')
   })
 })

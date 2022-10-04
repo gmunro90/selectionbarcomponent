@@ -11,6 +11,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 /*
 global
 SelectionBar
+WebsyDropdown
 include
 enigma
 schema
@@ -71,16 +72,19 @@ var SelectionBar = /*#__PURE__*/function () {
     key: "backSelection",
     value: function backSelection() {
       console.log('back clicked');
+      this.options.model.back();
     }
   }, {
     key: "forwardSelection",
     value: function forwardSelection() {
       console.log('fwd clicked');
+      this.options.model.forward();
     }
   }, {
     key: "clearSelection",
     value: function clearSelection() {
       console.log('clear clicked');
+      this.options.model.clearAll();
     }
   }, {
     key: "handleClick",
@@ -109,9 +113,10 @@ var session = enigma.create({
 session.open().then(function (global) {
   console.log(global);
   global.openDoc('d077bbca-1fa2-4564-83d5-88f801899a5c').then(function (app) {
-    console.log(app);
+    console.log('app', app);
     var selectionBar = new SelectionBar('websySelectionBar', {
       app: app
     });
+    var dropdown = new WebsyDropdown('websyDropdown');
   });
 });
