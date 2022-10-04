@@ -67,10 +67,11 @@ class SelectionBar {
       .then(layout => {
         console.log(layout)
         let html = layout.qSelectionObject.qSelections.map(res => 
-          ` <div class="selection-tabs">
-              <h5>${res.qField}</h5>
-              <h6>${res.qSelected}</h6>
-            </div>
+          `<div class="selection-tabs">
+                <h5>${res.qField}</h5>
+                <h6>${res.qSelected}</h6>
+          </div>
+            
           `)
         if (layout.qSelectionObject.qSelections.length > 0) {
           el.innerHTML += html
@@ -84,16 +85,16 @@ class SelectionBar {
       })
   }
   backSelection () {
-    console.log('back clicked')
-    this.options.model.back()
+    this.options.app.back()
+    this.render()
   }
   forwardSelection () {
-    console.log('fwd clicked')
-    this.options.model.forward()
+    this.options.app.forward()
+    this.render()
   }
   clearSelection () {
-    console.log('clear clicked')
-    this.options.model.clearAll()
+    this.options.app.clearAll()
+    this.render()
   }
   handleClick (event) {  
     if (event.target.classList.contains('back-btn')) {

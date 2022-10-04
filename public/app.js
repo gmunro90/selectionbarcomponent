@@ -58,7 +58,7 @@ var SelectionBar = /*#__PURE__*/function () {
       this.options.model.getLayout().then(function (layout) {
         console.log(layout);
         var html = layout.qSelectionObject.qSelections.map(function (res) {
-          return " <div class=\"selection-tabs\">\n              <h5>".concat(res.qField, "</h5>\n              <h6>").concat(res.qSelected, "</h6>\n            </div>\n          ");
+          return "<div class=\"selection-tabs\">\n                <h5>".concat(res.qField, "</h5>\n                <h6>").concat(res.qSelected, "</h6>\n          </div>\n            \n          ");
         });
 
         if (layout.qSelectionObject.qSelections.length > 0) {
@@ -71,20 +71,20 @@ var SelectionBar = /*#__PURE__*/function () {
   }, {
     key: "backSelection",
     value: function backSelection() {
-      console.log('back clicked');
-      this.options.model.back();
+      this.options.app.back();
+      this.render();
     }
   }, {
     key: "forwardSelection",
     value: function forwardSelection() {
-      console.log('fwd clicked');
-      this.options.model.forward();
+      this.options.app.forward();
+      this.render();
     }
   }, {
     key: "clearSelection",
     value: function clearSelection() {
-      console.log('clear clicked');
-      this.options.model.clearAll();
+      this.options.app.clearAll();
+      this.render();
     }
   }, {
     key: "handleClick",
