@@ -18,7 +18,7 @@ schema
 app
 */
 
-/* global SelectionBar */
+/* global SelectionBar WebsyDropdown */
 var SelectionBar = /*#__PURE__*/function () {
   function SelectionBar(elementId, options) {
     var _this = this;
@@ -62,6 +62,7 @@ var SelectionBar = /*#__PURE__*/function () {
           el.innerHTML += layout.qSelectionObject.qSelections.map(function (selection) {
             return "<div class=\"selection-tabs\">\n              <div id=websyDropdown\">\n              <h5>".concat(selection.qField, "</h5>\n              <h6>").concat(selection.qSelected, "</h6>\n              </div>\n            </div>");
           });
+          var dropdown = new WebsyDropdown('websyDropdown');
         } else {
           el.innerHTML += "\n          <div class=\"selection-tabs\">\n            <span>No selections applied</span>\n          </div>";
         }
@@ -114,6 +115,5 @@ session.open().then(function (global) {
     var selectionBar = new SelectionBar('websySelectionBar', {
       app: app
     });
-    var dropdown = new WebsyDropdown('websyDropdown');
   });
 });

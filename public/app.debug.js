@@ -7,7 +7,7 @@ enigma
 schema
 app
 */
-/* global SelectionBar */ 
+/* global SelectionBar WebsyDropdown */ 
 class SelectionBar {
   constructor (elementId, options) {
     this.elementId = elementId
@@ -76,13 +76,16 @@ class SelectionBar {
       .then(layout => {
         console.log(layout)
         if (layout.qSelectionObject.qSelections.length > 0) {
-          el.innerHTML += layout.qSelectionObject.qSelections.map(selection => 
+          el.innerHTML += 
+          layout.qSelectionObject.qSelections.map(selection => 
+            
             `<div class="selection-tabs">
               <div id=websyDropdown">
               <h5>${selection.qField}</h5>
               <h6>${selection.qSelected}</h6>
               </div>
             </div>`)
+          const dropdown = new WebsyDropdown('websyDropdown')
         }
         else {
           el.innerHTML += `
@@ -126,6 +129,5 @@ const session = enigma.create({
 session.open().then(global => {
   global.openDoc('d077bbca-1fa2-4564-83d5-88f801899a5c').then(app => {
     const selectionBar = new SelectionBar('websySelectionBar', {app})
-    const dropdown = new WebsyDropdown('websyDropdown')
   })
 })
